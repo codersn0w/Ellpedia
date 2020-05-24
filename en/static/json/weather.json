@@ -1,0 +1,23 @@
+{
+    "Tokyo": {
+        "weather": "moderate rain",
+        "temp": "NaN",
+        "icon": "10d"
+    },
+    "New York": {
+        "weather": "overcast clouds",
+        "temp": "NaN",
+        "icon": "10d"
+    },
+    "Cupertino": {
+        "weather": "overcast clouds",
+        "temp": "NaN",
+        "icon": "10d"
+    },
+    "London": {
+        "weather": "few clouds",
+        "temp": "NaN",
+        "icon": "10d"
+    },
+    "time": "00/00 00:00 (UTC)"
+}

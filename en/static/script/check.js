@@ -1,0 +1,2 @@
+function check(){var a=document.forms.search_form.q.value;if(a==""){return false;}else if(!a.match(/\S/g)){return false;}else{$("input").blur();}}
+function f_check(){var a=document.f_search_form.q.value;if(a==""){return false;}else if(!a.match(/\S/g)){return false;}else{$("input").blur();}}

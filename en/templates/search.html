@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Ellpedia Search</title>
+  <meta name="robots" content="noindex">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="stylesheet" media="screen and (min-width: 620px)"　type="text/css" href="../static/css/main.css">
+  <link rel="stylesheet" media="screen and (max-width: 620px)" type="text/css" href="../static/css/main_sp.css">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="apple-mobile-web-app-title" content="Ellpedia">
+  <link rel="apple-touch-icon" sizes="180x180" href="../static/css/image/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../static/css/image/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../static/css/image/favicon/favicon-16x16.png">
+  <link rel="manifest" href="../static/css/image/favicon/manifest.json">
+  <link rel="mask-icon" href="../static/css/image/favicon/safari-pinned-tab.svg" color="#7c7c7c">
+  <link rel="shortcut icon" href="../static/css/image/favicon/favicon.ico">
+  <meta name="msapplication-config" content="../static/css/image/favicon/browserconfig.xml">
+  <meta name="theme-color" content="#ffffff">
+  <script type="text/javascript" src="../static/script/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="../static/script/weather.js"></script>
+  <script type="text/javascript" src="../static/script/stocks.js"></script>
+  <script type="text/javascript" src="../static/script/check.js"></script>
+  <script type="text/javascript" src="../static/script/jquery.maxlength.js"></script>
+  <script type="text/javascript" src="../static/script/highlight.js"></script>
+  <script type="text/javascript">$(function(){var a=[];a="{{query}}".replace(/^\s+|\s+$/g,"").replace(/\s+/g," ").split(" ");for(i in a){if(a[i]!=""){$(".url").highlight(a[i]);$(".descr").highlight(a[i]);$("a[href]").removeHighlight(a[i]);}}});</script>
+</head>
+
+<body>
+  <header>
+    <a href="/"><div id="ellpedia"><span id="logo_color">Éll</span>pedia</div></a>
+    <form class="search_form" name="search_form" method="post" action="/search" onSubmit="return check()" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false">
+      <input type="text" value="{{query}}" name="q" class="type_text" maxlength="70" placeholder="Option>> n:, i:"><button type="submit" class="submit"><img src="../static/css/image/isearch_button.png" width="30px"></button>
+      <input type="hidden" name="spl" value="0">
+      <input type="hidden" name="p" value="1">
+    </form>
+  </header>
+
+  <div id="top_icon">
+    
+    <div class="wrap">
+      <div class="weather yellow">
+        <span id="ny_temp"></span>
+        <div id="ny"></div>
+      </div>
+      <span class="icon_text">New York</span>
+    </div>
+
+    <div class="wrap">
+      <div class="stocks">
+        <div id="usdjpy"></div>
+        <span id="uj_dec"></span>
+      </div>
+      <span class="icon_text">EUR/USD</span>
+    </div>
+
+    <div class="wrap">
+      <div class="weather silver">
+        <span id="cp_temp"></span>
+        <div id="cp"></div>
+      </div>
+      <span class="icon_text">Cupertino</span>
+    </div>
+
+    <div class="wrap">
+      <div class="weather red">
+        <span id="london_temp"></span>
+        <div id="london"></div>
+      </div>
+      <span class="icon_text">London</span>
+    </div>
+
+    <div class="wrap">
+      <div class="weather blue">
+        <span id="tokyo_temp"></span>
+        <div id="tokyo"></div>
+      </div>
+      <span class="icon_text">Tokyo</span>
+    </div>
+    
+  </div>
+
+  <div id="owm_credit">
+    <p>Weather data provided by [<a href="https://openweathermap.org" target="_blank">Open Weather Map</a>]</p><p>Last update: <span id="last_updated_time"></span></p>
+  </div>
+
+  {% if spell %}
+    {% if orig %}
+      <form method="post" name="spell1" action="/search">
+        <input type="hidden" name="q" value="{{spell}}">
+        <input type="hidden" name="spl" value="0">
+        <input type="hidden" name="p" value="1">
+        <p class="spell">Showing results for: <a href="javascript:spell1.submit()">{{spell}}</a></p>
+      </form>
+
+      <form method="post" name="spell2" action="/search">
+        <input type="hidden" name="q" value="{{query}}">
+        <input type="hidden" name="spl" value="1">
+        <input type="hidden" name="p" value="1">
+        <p class="spell">Search "{{query}}" on <a href="javascript:spell2.submit()">here</a></p>
+      </form>
+
+    {% else %}
+      <form method="post" name="spell3" action="/search">
+        <input type="hidden" name="q" value="{{spell}}">
+        <input type="hidden" name="spl" value="0">
+        <input type="hidden" name="p" value="1">
+        <p class="spell">Search suggestion: <a href="javascript:spell3.submit()">{{spell}}</a></p>
+      </form>
+    {% endif %}
+      <br>
+  {% endif %}
+
+  {% if no_result %}
+      <div class="result">
+        <div class="descr">{{no_result['descr']}}</div>
+        <div class="xbutton"><span style="color: #eb615e;">•</span> <span style="color:#f6cb32">•</span> <span style="color:#7aea45">•</span></div>
+        <div class="url"><a href="{{no_result['url']}}">{{no_result['top']}}</a></div>
+      </div>
+    {% endif %}
+
+  {% if top_n == 1 %}
+    {% if b_news %}
+      <div id="window">
+        <div class="window_head">News <span id="notif">&nbsp;{{notif}}&nbsp;</span></div>
+      {% for n in b_news %}
+        <div class="n_result">
+          <div class="time">{{n['time']}}</div>
+          <div class="news_thumb"><img src="../static/css/image/news_thumb{{n['num']}}.png"></div>
+          <a href="{{n['url']}}" target="_blank"><div class="n_title">{{n['title']}}</div></a>
+          <div class="source">{{n['source']}}</div>
+        </div>
+      {% endfor %}
+      </div>
+      <div id="b_credit">
+          News from [<a href="https://www.bing.com" target="_blank">Bing</a>]
+        </div>
+    {% endif %}
+  {% endif %}
+
+  {% if top_i == 1 %}
+    {% if im_results %}
+      <div id="imwindow">
+        <div class="window_head">iMages</div>
+          <div id="gallary">
+            <div id="imageswrap">
+      {% for im in im_results %}
+            <div class="imblock">
+              <div class="image">
+                <a class="imsrc" href="{{im['img_src']}}" target="_blank"><img src="{{im['thumb_src']}}"></a>
+              </div>
+              <a href="{{im['url']}}" target="_blank"><span class="im_source">Website</span></a>
+            </div>
+        {% endfor %}
+          </div>
+        </div>  
+      </div>
+      <div id="gi_credit">
+        Images from [<a href="https://images.google.com" target="_blank">Google</a>]
+      </div>
+    {% endif %}
+  {% endif %}
+
+  {% for w in wiki_results %}
+      <div class="w_result">
+        <a href="{{w['url']}}" class="wiki_link" target="_blank"><div class="w_title">{{w['title']}}</div></a>
+        <div class="xbutton"><span style="color: #eb615e;">•</span> <span style="color:#f6cb32">•</span> <span style="color:#7aea45">•</span></div>
+        <div class="descr">{{w['descr']}}<br><br><a href="{{w['url']}}" target="_blank">Continue Reading...</a></div>
+        <div class="archive">[<a href="https://web.archive.org/web/{{w['url']}}" target="_blank">Web Archive</a>]</div>
+      </div>
+    {% endfor %}
+
+  {% for t in top_results %}
+      <div class="result">
+        <a href="{{t['url']}}" target="_blank"><div class="title">{{t['title']}}</div></a>
+        <div class="url">{{t['d_url']}}</div>
+        <div class="xbutton"><span style="color: #eb615e;">•</span> <span style="color:#f6cb32">•</span> <span style="color:#7aea45">•</span></div>
+        <div class="descr">{{t['descr']}}</div>
+        <div class="archive">[<a href="https://web.archive.org/web/{{t['url']}}" target="_blank">Web Archive</a>]</div>
+      </div>
+    {% endfor %}
+
+  {% if top_n == 0 %}
+    {% if b_news %}
+      <div id="window">
+        <div class="window_head">News <span id="notif">&nbsp;{{notif}}&nbsp;</span></div>
+      {% for n in b_news %}
+        <div class="n_result">
+          <div class="time">{{n['time']}}</div>
+          <div class="news_thumb"><img src="../static/css/image/news_thumb{{n['num']}}.png"></div>
+          <a href="{{n['url']}}" target="_blank"><div class="n_title">{{n['title']}}</div></a>
+          <div class="source">{{n['source']}}</div>
+        </div>
+      {% endfor %}
+      </div>
+      <div id="b_credit">
+          News from [<a href="https://www.bing.com" target="_blank">Bing</a>]
+        </div>
+    {% endif %}
+  {% endif %}
+
+  {% for g in g_results %}
+      <div class="result">
+        <a href="{{g['url']}}" target="_blank"><div class="title">{{g['title']}}</div></a>
+        <div class="url">{{g['d_url']}}</div>
+        <div class="xbutton"><span style="color: #eb615e;">•</span> <span style="color:#f6cb32">•</span> <span style="color:#7aea45">•</span></div>
+        <div class="descr">{{g['descr']}}</div>
+        <div class="archive">[<a href="https://web.archive.org/web/{{g['url']}}" target="_blank">Web Archive</a>]</div>
+      </div>
+    {% endfor %}
+
+  {% if top_i == 0 %}
+    {% if im_results %}
+      <div id="imwindow">
+        <div class="window_head">iMages</div>
+          <div id="gallary">
+            <div id="imageswrap">
+      {% for im in im_results %}
+            <div class="imblock">
+              <div class="image">
+                <a class="imsrc" href="{{im['img_src']}}" target="_blank"><img src="{{im['thumb_src']}}"></a>
+              </div>
+              <a href="{{im['url']}}" target="_blank"><span class="im_source">Website</span></a>
+            </div>
+        {% endfor %}
+          </div>
+        </div>  
+      </div>
+      <div id="gi_credit">
+        Images from [<a href="https://images.google.com" target="_blank">Google</a>]
+      </div>
+    {% endif %}
+  {% endif %}
+
+  {% for b in b_results %}
+      <div class="result">
+        <a href="{{b['url']}}" target="_blank"><div class="title">{{b['title']}}</div></a>
+          <div class="url">{{b['d_url']}}</div>
+          <div class="xbutton"><span style="color: #eb615e;">•</span> <span style="color:#f6cb32">•</span> <span style="color:#7aea45">•</span></div>
+          <div class="descr">{{b['descr']}}</div>
+          <div class="archive">[<a href="https://web.archive.org/web/{{b['url']}}" target="_blank">Web Archive</a>]</div>
+        </div>
+    {% endfor %}
+
+  <div id="u_window">
+    <div class="window_head">GET Search URL</div>
+    <form id="url_form">
+      <input type="text" id="url_type_text" value="{{get_url}}" readonly>
+    </form>
+  </div>
+
+  <div id="nb">
+    <div class="b_button stblue">
+      <form method="post" name="back" action="/search">
+        <input type="hidden" name="q" value="{{query}}">
+        <input type="hidden" name="spl" value="0">
+        <input type="hidden" name="p" value="{{page_back}}">
+        <a href="javascript:back.submit()">
+          <img src="../static/css/image/back.png">
+        </a>
+      </form>
+    </div>
+
+    <div class="n_button stblue">
+      <form method="post" name="next" action="/search">
+        <input type="hidden" name="q" value="{{query}}">
+        <input type="hidden" name="spl" value="0">
+        <input type="hidden" name="p" value="{{page_next}}">
+        <a href="javascript:next.submit()">
+          <img src="../static/css/image/next.png">
+        </a>
+      </form>
+    </div>
+  </div>
+  
+  <div id="suggestions">
+  {% for s in sug %}
+    <form method="post" name="suggest{{s['num']}}" action="/search">
+      <input type="hidden" name="q" value="{{s['word']}}">
+      <input type="hidden" name="spl" value="0">
+      <input type="hidden" name="p" value="1">
+      <a href="javascript:suggest{{s['num']}}.submit()">
+        {{s['word']}}
+      </a>
+    </form>
+  {% endfor %}
+  </div>
+  
+  <div class="blank"></div>
+  <form class="search_form" name="f_search_form" method="post" action="/search?" onSubmit="return f_check()" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false">
+    <input type="text" value="{{query}}" name="q" class="type_text" maxlength="70" placeholder="Option>> n:, i:"><button type="submit" class="submit"><img src="../static/css/image/isearch_button.png" width="30px"></button>
+    <input type="hidden" name="spl" value="0">
+    <input type="hidden" name="p" value="1">
+  </form>
+
+  <footer>
+    <div class="fwrap">
+      <form method="post" name="chlang" action="http://localhost:50000/search">
+        <input type="hidden" name="q" value="{{query}}">
+        <input type="hidden" name="spl" value="0">
+        <input type="hidden" name="p" value="1">
+        <a href="javascript:chlang.submit()">
+          <div class="footer_icon green">
+            <div id="sw_lang"><img src="../static/css/image/globe.png"></div>
+          </div>
+        </a>
+      </form>
+      <span class="icon_text">EN->JP</span>
+    </div>
+
+    <div class="fwrap">
+      <a href="http://localhost:50003">
+        <div class="footer_icon stblue">
+          <div id="bot"><img src="../static/css/image/chat.png"></div>
+        </div>
+      </a>
+      <span class="icon_text">Chatbot</span>
+    </div>
+
+    <div class="fwrap">
+      <a href="http://localhost:50002">
+        <div class="footer_icon swapred">
+          <div id="academic"><img src="../static/css/image/terms.png"></div>
+        </div>
+      </a>
+      <span class="icon_text">Academic</span>
+    </div>
+
+    <div class="fwrap">
+      <a href="https://blog.ellpedia.com" target="_blank">
+        <div class="footer_icon_two">
+          <span id="icon_head_y"></span>
+          <div id="blog"><img src="../static/css/image/edit.png"></div>
+        </div>
+      </a>
+      <span class="icon_text">Our Blog</span>
+    </div>
+
+    <div class="fwrap">
+      <a href="https://blog.ellpedia.com/privacy/" target="_blank">
+        <div class="footer_icon orange">
+          <div id="lock"><img src="../static/css/image/lock.png"></div>
+        </div>
+      </a>
+      <span class="icon_text">Privacy</span>
+    </div>
+  </footer>
+
+  <div id="copyright">Language: English<br>© 2020 Ellpedia | <a href="https://github.com/thunderra1n/Ellpedia" target="_blank">Source Code</a><br>Designed by Ellpedia in Tokyo</div> 
+  <script src="../static/lightbox/js/lightbox.js"></script>
+</body>
+</html>

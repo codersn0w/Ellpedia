@@ -1,0 +1,23 @@
+{
+    "Tokyo": {
+        "weather": "moderate rain",
+        "temp": "21.17",
+        "icon": "10n"
+    },
+    "New York": {
+        "weather": "few clouds",
+        "temp": "12.02",
+        "icon": "02n"
+    },
+    "Cupertino": {
+        "weather": "clear sky",
+        "temp": "11.03",
+        "icon": "01n"
+    },
+    "London": {
+        "weather": "broken clouds",
+        "temp": "15.49",
+        "icon": "04d"
+    },
+    "time": "10/11 20:00 (JST)"
+}

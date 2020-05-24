@@ -1,0 +1,285 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: noto;
+    src: url('./font/NotoSansCJKjp-Regular.woff');
+}
+
+@font-face{
+	font-family: mplus;
+	src: url('./font/mplus-2c-light.woff');
+}
+
+html,body{
+	background-color: #fff;
+	font-family: arial, sans-serif;
+	-webkit-text-size-adjust: 100%;
+	-webkit-font-smoothing: subpixel-antialiased;
+}
+
+body{
+	margin:auto;
+	width: 100%;
+}
+
+#main{
+	padding-top: 72px;
+	position: absolute;
+	width: 100%;
+	height: 335px;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	margin: auto;
+}
+
+#info{
+	text-align: center;
+	margin-top: 3px;
+	font-size: 13px;
+	color: #888;
+}
+
+#info a{
+	color: #888;
+}
+
+header{
+    margin-bottom: 75px;
+	height: 132px;
+}
+
+#ellpedia{
+	width: 100%;
+	height: 75px;
+	font-family: "mplus", sans-serif;
+	margin: auto;
+	text-align: center;
+	color: #919191;
+	font-size: 50px;
+	line-height: 75px;
+	margin-bottom: 15px;
+}
+
+#logo_color{
+	color: red;
+}
+
+#search_form{
+	width: calc(100% - 8px);
+	width : -webkit-calc(100% - 8px);
+	height: 40px;
+	margin: 0 auto;
+	padding:0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#search_form:hover{
+	border: 1px solid #999;
+}
+
+#type_text{
+	margin: 0;
+	margin-left: 5px;
+	width: calc(100% - 42px);
+	width : -webkit-calc(100% - 42px);
+	padding: 5px 0;
+	line-height: 28px;
+	font-size: 18px;
+	color: #666;
+	float:left;
+	border: none;
+	outline: 0;
+}
+
+.submit{
+	padding: 5px;
+	width:30px;
+	height: 30px;
+	border: 0px;
+	background-color: #fff;
+}
+
+.blue{
+	background : -webkit-linear-gradient(top, #1a51f0 0%, #03e4fe 100%);
+	background : -moz-linear-gradient(top, #1a51f0 0%, #03e4fe 100%);
+	background : -ms-linear-gradient(top, #1a51f0 0%, #03e4fe 100%);
+	background : -o-linear-gradient(top, #1a51f0 0%, #03e4fe 100%);
+	background : linear-gradient(top, #1a51f0 0%, #03e4fe 100%); 
+}
+
+.yellow{
+	background : -webkit-linear-gradient(top, #ffab00 0%, #feca00 100%);
+	background : -moz-linear-gradient(top, #ffab00 0%, #feca00 100%);
+	background : -ms-linear-gradient(top, #ffab00 0%, #feca00 100%);
+	background : -o-linear-gradient(top, #ffab00 0%, #feca00 100%);
+	background : linear-gradient(top, #ffab00 0%, #feca00 100%);
+}
+
+.orange{
+	background : -webkit-linear-gradient(top, #fea929 0%, #f6682e 100%);
+	background : -moz-linear-gradient(top, #fea929 0%, #f6682e 100%);
+	background : -ms-linear-gradient(top, #fea929 0%, #f6682e 100%);
+	background : -o-linear-gradient(top, #fea929 0%, #f6682e 100%);
+	background : linear-gradient(top, #fea929 0%, #f6682e 100%);
+}
+
+.silver{
+	background : -webkit-linear-gradient(top, #898b91 0%, #ddd 100%);
+	background : -moz-linear-gradient(top, #898b91 0%, #ddd 100%);
+	background : -ms-linear-gradient(top, #898b91 0%, #ddd 100%);
+	background : -o-linear-gradient(top, #898b91 0%, #ddd 100%);
+	background : linear-gradient(top, #898b91 0%, #ddd 100%);
+}
+
+.red{
+	background : -webkit-linear-gradient(top, #ff2666 0%, #ff5b39 100%);
+	background : -moz-linear-gradient(top, #ff2666 0%, #ff5b39 100%);
+	background : -ms-linear-gradient(top, #ff2666 0%, #ff5b39 100%);
+	background : -o-linear-gradient(top, #ff2666 0%, #ff5b39 100%);
+	background : linear-gradient(top, #ff2666 0%, #ff5b39 100%);
+}
+
+.swapred{
+	background : -webkit-linear-gradient(top, #ff5b39 0%, #ff2666 100%);
+	background : -moz-linear-gradient(top, #ff5b39 0%, #ff2666 100%);
+	background : -ms-linear-gradient(top, #ff5b39 0%, #ff2666 100%);
+	background : -o-linear-gradient(top, #ff5b39 0%, #ff2666 100%);
+	background : linear-gradient(top, #ff5b39 0%, #ff2666 100%);
+}
+
+.stblue{
+	background : -webkit-linear-gradient(top, #03e4fe 0%, #1b52ef 100%);
+	background : -moz-linear-gradient(top, #03e4fe 0%, #1b52ef 100%);
+	background : -ms-linear-gradient(top, #03e4fe 0%, #1b52ef 100%);
+	background : -o-linear-gradient(top, #03e4fe 0%, #1b52ef 100%);
+	background : linear-gradient(top, #03e4fe 0%, #1b52ef 100%);
+}
+
+.star{
+	background : -webkit-linear-gradient(top, #50ebc2 0%, #50ebc2 33%, #59c7fd 100%);
+	background : -moz-linear-gradient(top, #50ebc2 0%, #50ebc2 33%, #59c7fd 100%);
+	background : -ms-linear-gradient(top, #50ebc2 0%, #50ebc2 33%, #59c7fd 100%);
+	background : -o-linear-gradient(top, #50ebc2 0%, #50ebc2 33%, #59c7fd 100%);
+	background : linear-gradient(top, #50ebc2 0%, #50ebc2 33%, #59c7fd 100%); inset;
+}
+
+.green{
+	background : -webkit-linear-gradient(top, #86fe65 0%, #06d315 100%);
+	background : -moz-linear-gradient(top, #86fe65 0%, #06d315 100%);
+	background : -ms-linear-gradient(top, #86fe65 0%, #06d315 100%);
+	background : -o-linear-gradient(top, #86fe65 0%, #06d315 100%);
+	background : linear-gradient(top, #86fe65 0%, #06d315 100%);
+}
+
+footer{
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	margin: auto;
+}
+
+#footers{
+	display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+	-webkit-justify-content: space-between;
+	justify-content: space-between;
+	width: 100%;
+	height: 78px;
+}
+
+
+.fwrap{
+	float:left;
+	margin: 0 2px;
+	margin-bottom: 20px;
+	width: 60px;
+	height: 78px;
+	text-align:center;
+}
+
+
+.footer_icon{
+	width: 60px;
+    height: 60px;
+	position: relative;
+	border-radius: 12px;
+}
+
+.footer_icon_two{
+	background-color: #fafafa;
+	width: 58px;
+    height: 58px;
+	position: relative;
+	border: 1px solid #cfcfcf;
+	border-radius: 12px;
+}
+
+
+#icon_head_y{
+	display: block;
+	position: absolute;
+	margin: 0 auto;
+	color: #fff;
+	width: 58px;
+	height: 14px;
+	line-height: 18px;
+	background-color: #ffdb44;
+	border-bottom: 1px solid #ccc;
+	border-radius: 11px 11px 0 0;
+}
+
+.footer_icon img{
+	width: 45px;
+	height: 45px;
+	position: absolute;
+	display: block;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	margin: auto;
+}
+
+.footer_icon_two img{
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	display: block;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	margin: auto;
+	margin-top: 14px;
+	margin-left: 11.5px;
+}
+
+.icon_text{
+	display: block;
+	font-size: 12px;
+	color: #555;
+	width: 60px;
+	height: 18px;
+	line-height: 18px;
+}
+
+#copyright{
+	display: block;
+	height: 40px;
+	margin-top: 10px;
+	padding:0;
+	text-align: center;
+	color: #868686;
+	font-size: 12px;
+}
+
+#copyright a{
+	color: #868686;
+}
