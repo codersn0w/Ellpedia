@@ -6,7 +6,7 @@ import time
 from datetime import datetime
 
 # APIキーの指定 - 以下を書き換えてください★ --- (※1)
-apikey = "23210da5b41a86e22ddbdbde038a6b0d"
+apikey = "YOUR_API_KEY"
 
 # 天気を調べたい都市の一覧 --- (※2)
 cities = ["Tokyo,JP", "New York,US", "Cupertino,US", "London,UK",]

@@ -18,18 +18,21 @@ def gi_search(query, ua):
     request = req.Request(url=s_url, headers=headers)
     res = req.urlopen(request, timeout=10).read()
     root = lh.fromstring(res.decode('utf-8'))
-    image_xpath = root.xpath('//table[4]//a')
-    link_xpath = './@href'
-    thumb_xpath = './img/@src'
+    image_xpath = root.xpath('//td[@class="e3goi"]')
+    link_xpath = './/tr[1]/td/a/@href'
+    thumb_xpath = './/tr[1]/td/a/div/img/@src'
     results = []
-    rc = re.compile('&sa=U&ved=0.*')
+    rc = re.compile('&sa=U&ved=.*')
     num = 0
     for im in image_xpath:
       if num <= 0:
         url = im.xpath(link_xpath)[0].lstrip('/url?q=')
         url = rc.sub('', url)
         thumb_src = im.xpath(thumb_xpath)[0]
-        d_url = url
+        if len(url) > 60:
+          d_url = url[:60] + '...'
+        else:
+          d_url = url
         img_src = url
         results.append({'url': html.escape(url, quote=True),
           'd_url': html.escape(d_url, quote=True),

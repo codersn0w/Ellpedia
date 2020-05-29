@@ -17,11 +17,11 @@ def gi_search(query, ua):
     request = req.Request(url=s_url, headers=headers)
     res = req.urlopen(request, timeout=10).read()
     root = lh.fromstring(res.decode('utf-8'))
-    image_xpath = root.xpath('//table[4]//a')
-    link_xpath = './@href'
-    thumb_xpath = './img/@src'
+    image_xpath = root.xpath('//td[@class="e3goi"]')
+    link_xpath = './/tr[1]/td/a/@href'
+    thumb_xpath = './/tr[1]/td/a/div/img/@src'
     results = []
-    rc = re.compile('&sa=U&ved=0.*')
+    rc = re.compile('&sa=U&ved=.*')
     num = 0
     for im in image_xpath:
       if num <= 7:
