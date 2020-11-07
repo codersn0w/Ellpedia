@@ -8,6 +8,7 @@ def cr_search(query, page, ua):
   try:
     values = {
       'q': query,
+      'from_ui': 'yes',
       'page': page,
     }
     s_url = 'https://search.crossref.org/?' + up.urlencode(values)
