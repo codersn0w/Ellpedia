@@ -18,9 +18,9 @@ def g_search(query, ua):
     res = req.urlopen(request, timeout=10).read()
     root = lh.fromstring(res.decode('utf-8'))
     base_xpath = root.xpath('.//div[@class="rc"]')
-    title_xpath = './div[@class="r"]/a/h3//text()'
-    link_xpath = './div[@class="r"]/a/@href'
-    descr_xpath = './div[@class="s"]/div/span[@class="st"]//text()'
+    title_xpath = './div/a/h3//text()'
+    link_xpath = './div[1]/a/@href'
+    descr_xpath = './div[2]/div/span//text()'
     g_urls = []
     g_wikis = []
     g_top_results = []
