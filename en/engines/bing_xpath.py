@@ -20,11 +20,11 @@ def b_search(query, page, ua, g_urls, g_wikis):
     request = req.Request(url=s_url, headers=headers)
     res = req.urlopen(request, timeout=10).read()
     root = lh.fromstring(res.decode('utf-8'))
-    base_xpath = root.xpath('//div[@id="b_content"]/main/ol[@id="b_results"]//li[@class="b_algo"]')
-    title_xpath = './/h2/a//text()'
-    link_xpath = './/h2/a/@href'
+    base_xpath = root.xpath('.//li[@class="b_algo"]')
+    title_xpath = './h2/a//text()'
+    link_xpath = './h2/a/@href'
     descr_xpath = './div[contains(@class, "b_caption")]/p//text()'
-    w_descr_xpath = './div[contains(@class, "b_caption")]//p//text()'
+    w_descr_xpath = './div[@class="b_wikiRichcard_noHeroSection"]//p[@class="b_paractl"]/text()'
     b_wikis = []
     b_top_results = []
     b_results = []

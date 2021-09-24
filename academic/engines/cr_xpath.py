@@ -18,7 +18,7 @@ def cr_search(query, page, ua):
     request = req.Request(url=s_url, headers=headers)
     res = req.urlopen(request, timeout=10).read()
     root = lh.fromstring(res.decode('utf-8'))
-    base_xpath = root.xpath('..//tr')
+    base_xpath = root.xpath('.//tr')
     title_xpath = './td/p[@class="lead"]/text()'
     link_xpath = './td/div[@class="item-links-outer"]/div[@class="item-links"]/a/@href'
     descr_xpath = './td/p[@class="extra"]//text()'
