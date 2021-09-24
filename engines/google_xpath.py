@@ -32,7 +32,7 @@ def g_search(query, page, spel, ua):
     else:
       orig = ''
     base_xpath = root.xpath('.//div[@class="g"]')
-    title_xpath = './/div[@class="tF2Cxc"]/div[@class="yuRUbf"]/a/h3//text()'
+    title_xpath = './/div[@class="tF2Cxc"]/div[@class="yuRUbf"]/a/h3/text()'
     link_xpath = './/div[@class="tF2Cxc"]/div[@class="yuRUbf"]/a/@href'
     descr_xpath = './/div[@class="IsZvec"]/div//text()'
     g_urls = []

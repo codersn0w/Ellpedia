@@ -32,9 +32,9 @@ def g_search(query, page, spel, ua):
     else:
       orig = ''
     base_xpath = root.xpath('.//div[@class="g"]')
-    title_xpath = './div[@class="tF2Cxc"]/div[@class="yuRUbf"]/a/h3/span//text()'
-    link_xpath = './div[@class="tF2Cxc"]/div[@class="yuRUbf"]/a/@href'
-    descr_xpath = './div[@class="tF2Cxc"]/div[@class="IsZvec"]/div/span[@class="aCOpRe"]/span//text()'
+    title_xpath = './/div[@class="tF2Cxc"]/div[@class="yuRUbf"]/a/h3/text()'
+    link_xpath = './/div[@class="tF2Cxc"]/div[@class="yuRUbf"]/a/@href'
+    descr_xpath = './/div[@class="IsZvec"]/div//text()'
     g_urls = []
     g_wikis = []
     g_top_results = []
@@ -89,18 +89,19 @@ def g_search(query, page, spel, ua):
           'descr': descr,
           })
       i+=1
-    try:
-      sug_base_xpath = root.xpath('.//div[@id="botstuff"]//a[@class="k8XOCe"]/div[@class="s75CSd"]//text()')
+    '''try:
+      sug_base_xpath = root.xpath('.//div[@id="botstuff"]//a[@class="k8XOCe"]/div[@class="s75CSd OhScic AB4Wff"]/b//text()')
       while l<=2:
         sug = sug_base_xpath[l]
-        print(sug)
+        if not query in sug:
+          sug = query + ' ' + sug
         sug_results.append({
           'word': sug,
           'num': l,
           })
         l+=1
     except:
-      pass
-    return g_wikis, g_top_results, g_results, g_urls, spell, orig, sug_results
+      pass'''
+    return g_wikis, g_top_results, g_results, g_urls, spell, orig, []
   except:
     return [], [], [], [], '', '', []
