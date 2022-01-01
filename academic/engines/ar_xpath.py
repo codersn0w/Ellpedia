@@ -15,6 +15,7 @@ def ar_search(query, page):
     base_xpath = root.xpath('.//entry')
     title_xpath = './/title/text()'
     link_xpath = './/id/text()'
+    #author_xpath = './/author/name/text()'
     descr_xpath = './/summary/text()'
     a_urls = []
     ar_results = []
@@ -30,6 +31,7 @@ def ar_search(query, page):
         reurl = reurl.rstrip('/')
       reurl = reurl.lower()
       a_urls.append(reurl)
+      #author = a.xpath(descr_xpath)
       descr = a.xpath(descr_xpath)[0].replace('\n', ' ').strip()
       if len(url) > 60:
         d_url = url[:60] + '...'
@@ -41,6 +43,7 @@ def ar_search(query, page):
         'url': url,
         'd_url': d_url,
         'title': title,
+        #'author': author,
         'descr': descr,
         'engine': 'arXiv',
         })

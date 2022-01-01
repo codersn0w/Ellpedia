@@ -21,6 +21,7 @@ def cr_search(query, page, ua):
     base_xpath = root.xpath('.//tr')
     title_xpath = './td/p[@class="lead"]/text()'
     link_xpath = './td/div[@class="item-links-outer"]/div[@class="item-links"]/a/@href'
+    #author_xpath = './td/p[@class="expand"]//text()'
     descr_xpath = './td/p[@class="extra"]//text()'
     cr_urls = []
     cr_results = []
@@ -38,6 +39,8 @@ def cr_search(query, page, ua):
         reurl = reurl.rstrip('/')
       reurl = reurl.lower()
       cr_urls.append(reurl)
+      #iauthor = c.xpath(author_xpath)
+      #author = ''.join(iauthor)
       idescr = c.xpath(descr_xpath)
       descr = ''.join(idescr).replace('\n', ' ').replace('    ', ' ').replace('   ', ' ').replace('  ', ' ').lstrip(' ').rstrip(' ')
       if len(url) > 60:
@@ -48,6 +51,7 @@ def cr_search(query, page, ua):
         'url': url,
         'd_url': d_url,
         'title': title,
+        #'author': author,
         'descr': descr,
         'engine': 'CrossRef'
         })

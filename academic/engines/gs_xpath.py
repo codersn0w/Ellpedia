@@ -20,6 +20,7 @@ def gs_search(query, page, ua):
     base_xpath = root.xpath('.//div[@class="gs_ri"]')
     title_xpath = './h3[@class="gs_rt"]/a//text()'
     link_xpath = './h3[@class="gs_rt"]/a/@href'
+    #author_xpath = './div[@class="gs_a"]//text()'
     descr_xpath = './div[@class="gs_rs"]//text()'
     g_urls = []
     gs_results = []
@@ -39,6 +40,8 @@ def gs_search(query, page, ua):
         reurl = reurl.rstrip('/')
       reurl = reurl.lower()
       g_urls.append(reurl)
+      #iauthor = g.xpath(author_xpath)
+      #author = ''.join(iauthor)
       idescr = g.xpath(descr_xpath)
       descr = ''.join(idescr)
       if len(url) > 60:
@@ -49,6 +52,7 @@ def gs_search(query, page, ua):
         'url': url,
         'd_url': d_url,
         'title': title,
+        #'author': author,
         'descr': descr,
         'engine': 'Google Scholar',
         })

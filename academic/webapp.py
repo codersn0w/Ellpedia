@@ -11,6 +11,8 @@ from engines.random_ua import generate_ua
 from engines.gs_xpath import gs_search
 from engines.cr_xpath import cr_search
 from engines.ar_xpath import ar_search
+from engines.ci_xpath import ci_search
+from concurrent.futures import ThreadPoolExecutor
 app = Flask(__name__)
 
 @app.route('/')
@@ -41,10 +43,12 @@ def search():
       query = query[:70]
   ua = generate_ua()
   results=[]
-  gs = gs_search(query, page, ua)
-  cr = cr_search(query, page, ua)
-  ar = ar_search(query, page)
-  results = gs[0]+cr[0]+ar[0]
+  with ThreadPoolExecutor(max_workers=10) as executor:
+    gs = gs_search(query, page, ua)
+    cr = cr_search(query, page, ua)
+    ar = ar_search(query, page)
+    ci = ci_search(query, page, ua)
+  results = gs[0]+cr[0]+ar[0]+ci[0]
   get_url = "http://localhost:50002/search?" + up.urlencode({'q': query, 'p': page})
   if page == 1:
     page_back = 1
@@ -55,7 +59,7 @@ def search():
   else:
     page_back = page - 1
     page_next = page + 1
-  if gs == ([],[]) and cr == ([],[]) and ar == ([],[]):
+  if gs == ([],[]) and cr == ([],[]) and ar == ([],[]) and ci == ([],[]):
   	no_result = {
     'url': '/',
     'descr': 'No Result',

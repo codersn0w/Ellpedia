@@ -2,7 +2,7 @@
 '''
 Ellpedia is released under the AGPL-3.0 Licence.
 See the LICENCE file.
-(C) ThunderRa1n, <podsn0w@gmail.com>
+(C) codersn0w, <podsn0w@gmail.com>
 '''
 from flask import Flask, render_template, request
 import urllib.parse as up
@@ -131,7 +131,7 @@ def search():
     get_url = get_url + "&spl=1"
   sug = ggl[6]
   if ggl == ([],[],[],[],'','', []) and bng == ([],[],[]):
-  	no_result = {
+    no_result = {
     'url': '/',
     'descr': '表示結果なし(データ取得エラー)',
     'top': 'TOPへ',
